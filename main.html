@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>json form</title>
+
+</head>
+
+<body>
+    
+    <div class="container contact-form">
+        <form class="child">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name"><br>
+            <label for="age">Age:</label><br>
+            <input type="number" id="number" name="age"><br><br>
+            <label for="city">City:</label><br>
+            <input type="text" id="city" name="city"><br>
+            <label for="country">Country:</label><br>
+            <input type="text" id="country" name="country"><br><br>
+
+            <div class="input-group">
+            <h1>Food</h1><br>
+            <input type="checkbox" name="veg-type" value="nonveg">
+            <label for="nonveg"> Non-veg</label><br>
+            <input type="checkbox" name="veg-type" value="veg">
+            <label for="veg"> Veg</label><br>
+            </div><br>
+
+
+            <h1>Select Gender</h1><br>
+            <select name="gender" id="gender">
+                <option value="Gender" disabled >gender</option>
+                <option value="male">male</option>
+                <option value="female">female</option>
+
+            </select>
+          <br>
+            <h1>Agerange</h1>
+            <input type="radio" value="18-30" name="range" id="html">
+            <label for="html">18-30</label><br>
+            <input type="radio" value="31-40" name="range" id="css">
+            <label for="css">31-40</label><br>
+            <input type="radio" name="range" value="41-80" id="javascript">
+            <label for="javascript">41-80</label><br><br>
+
+            <button type="submit">submit</button>
+        </form>
+
+
+    </div>
+
+
+
+
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            const data = new FormData(event.target);
+
+            const formJSON = Object.fromEntries(data.entries());
+
+            formJSON.food = data.getAll('veg-type');
+            formJSON.Agerange = data.getAll('range');
+
+            const results = document.querySelector('.results pre');
+
+            const output = JSON.stringify(formJSON, null, 2);
+            console.log(output)
+        }
+
+        const form = document.querySelector('.contact-form');
+        form.addEventListener('submit', handleFormSubmit);
+
+    </script>
+</body>
+
+</html>
